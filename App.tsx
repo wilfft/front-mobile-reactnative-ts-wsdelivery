@@ -1,13 +1,14 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import Header from "./src/Header";
+
 import {
   useFonts,
   OpenSans_400Regular,
   OpenSans_700Bold,
 } from "@expo-google-fonts/open-sans";
 import AppLoading from "expo-app-loading";
+import Routes from "./src/Routes";
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -18,10 +19,12 @@ export default function App() {
   if (!fontsLoaded) {
     return <AppLoading />;
   }
+
+  const handleOnPress = () => {};
   return (
     <View style={styles.container}>
-      <Header />
       <StatusBar style="auto" />
+      <Routes />
     </View>
   );
 }
