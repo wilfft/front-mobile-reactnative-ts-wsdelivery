@@ -1,7 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, View } from "react-native";
-
 import {
   useFonts,
   OpenSans_400Regular,
@@ -20,7 +19,6 @@ export default function App() {
     return <AppLoading />;
   }
 
-  const handleOnPress = () => {};
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />

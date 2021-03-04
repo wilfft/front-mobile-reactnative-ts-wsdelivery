@@ -1,21 +1,36 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import Header from "../Header";
+import { Ordem } from "../types";
+import dayjs from "dayjs";
+import "dayjs/locale/pt-br";
+import relativeTime from "dayjs/plugin/relativeTime";
+dayjs.locale("pt-br");
+dayjs.extend(relativeTime);
 
-function OrdemCard() {
+type Props = {
+  ordem: Ordem;
+};
+
+function calculaTempo(date: string) {
+  return dayjs(date).fromNow();
+}
+function OrdemCard({ ordem }: Props) {
   return (
     <>
-      <Header />
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text style={styles.orderName}>Pedido 1</Text>
-          <Text style={styles.orderPrice}>RS 50,00 </Text>
+          <Text style={styles.orderName}>Pedido {ordem.id}</Text>
+          <Text style={styles.orderPrice}>
+            R$ {ordem.total.toFixed(2).replace(".", ",")}
+          </Text>
         </View>
-        <Text style={styles.text}>Há 30min</Text>
+        <Text style={styles.text}>{calculaTempo(ordem.momento)}</Text>
         <View style={styles.productsList}>
-          <Text style={styles.text}>Pizza Calabresa</Text>
-          <Text style={styles.orderPrice}>Pizza Quatro Queijos</Text>
-          <Text style={styles.orderPrice}>Pizza de Frango com Catupiry</Text>
+          {ordem.produtos.map((prod) => (
+            <Text key={prod.id} style={styles.text}>
+              {prod.nome}
+            </Text>
+          ))}
         </View>
       </View>
     </>
@@ -24,10 +39,10 @@ function OrdemCard() {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: "10%",
+    marginTop: "5%",
     marginLeft: "2%",
     marginRight: "2%",
-    marginBottom: "2%",
+    marginBottom: "1%",
     padding: 15,
     backgroundColor: "#FFF",
     shadowOpacity: 0.25,

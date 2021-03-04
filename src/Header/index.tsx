@@ -8,7 +8,7 @@ function Header() {
   const navigation = useNavigation();
 
   const handleOnPress = () => {
-    navigation.navigate("Inicio");
+    navigation.navigate("Home");
   };
 
   return (
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     flexDirection: "row",
     justifyContent: "center",
-    height: 96,
+    height: 86,
   },
   text: {
     fontSize: 18,
