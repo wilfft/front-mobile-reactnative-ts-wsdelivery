@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Linking, StyleSheet } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { View, Text } from "react-native";
@@ -36,24 +36,21 @@ function OrdemDetalhes({ route }: Props) {
   const handleOnCancel = () => {
     navigation.navigate("Ordens");
   };
-
+  const handleStartNavigation = () => {
+    Linking.openURL(
+      `https://www.google.com/maps/dir/?api=1&travelmode=driving&dir_action=navigate&destination=${ordem.latitude},${ordem.longitude}`
+    );
+  };
   return (
     <>
       <Header />
       <View style={styles.container}>
         <OrdemCard ordem={ordem} />
-        <RectButton style={styles.button}>
+        <RectButton style={styles.button} onPress={handleStartNavigation}>
           <Text style={styles.buttonText}>INICIAR NAVEGAÇÃO</Text>
         </RectButton>
-        <RectButton style={styles.button}>
-          <Text
-            style={styles.buttonText}
-            onPress={() => {
-              handleConfirmDelivery;
-            }}
-          >
-            CONFIRMA ENTREGA
-          </Text>
+        <RectButton style={styles.button} onPress={handleConfirmDelivery}>
+          <Text style={styles.buttonText}>CONFIRMA ENTREGA</Text>
         </RectButton>
         <RectButton style={styles.button} onPress={handleOnCancel}>
           <Text style={styles.buttonText}>CANCELAR</Text>
